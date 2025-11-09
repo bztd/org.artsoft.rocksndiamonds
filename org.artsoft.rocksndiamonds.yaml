@@ -27,6 +27,12 @@ modules:
       - type: archive
         url: https://github.com/libxmp/libxmp/releases/download/libxmp-4.6.3/libxmp-4.6.3.tar.gz
         sha256: b189a2ff3f3eef0008512e0fb27c2cdc27480bc1066b82590a84d02548fab96d
+  - name: fluidsynth #SDL2-mixer
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.4.8.tar.gz
+        sha256: d6d04e9014557906ee42aa1fe3cd580840ea482d4c3b1a45fddd45ec606d6e97
   - name: SDL2-mixer
     buildsystem: cmake-ninja
     builddir: true
