@@ -17,6 +17,16 @@ build-options:
 
 modules:
   - shared-modules/SDL2/SDL2_image.json
+  - name: libxmp #SDL2-mixer
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_STATIC=OFF
+      - -DCMAKE_BUILD_TYPE:STRING=Release
+    sources:
+      - type: archive
+        url: https://github.com/libxmp/libxmp/releases/download/libxmp-4.6.3/libxmp-4.6.3.tar.gz
+        sha256: b189a2ff3f3eef0008512e0fb27c2cdc27480bc1066b82590a84d02548fab96d
   - name: SDL2-mixer
     buildsystem: cmake-ninja
     builddir: true
