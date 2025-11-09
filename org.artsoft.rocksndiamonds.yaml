@@ -9,14 +9,35 @@ finish-args:
   - --share=network
   - --device=dri
   - --socket=pulseaudio
+  
+build-options:
+  env:
+    C_INCLUDE_PATH: /app/include/SDL2:/app/include
+    CPLUS_INCLUDE_PATH: /app/include/SDL2:/app/include
 
 modules:
   - shared-modules/SDL2/SDL2_image.json
+  - name: SDL2-mixer
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_VERBOSE_MAKEFILE=ON
+      - -DCMAKE_BUILD_TYPE:STRING=Release
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.1/SDL2_mixer-2.8.1.tar.gz
+        sha256: cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660
+  - name: SDL2-net
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_VERBOSE_MAKEFILE=ON
+      - -DCMAKE_BUILD_TYPE:STRING=Release
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_net/releases/download/release-2.2.0/SDL2_net-2.2.0.tar.gz
+        sha256: 4e4a891988316271974ff4e9585ed1ef729a123d22c08bd473129179dc857feb
   - name: rocksndiamonds
-    build-options:
-      env:
-        C_INCLUDE_PATH: /app/include/SDL2:/app/include
-        CPLUS_INCLUDE_PATH: /app/include/SDL2:/app/include
     buildsystem: simple
     build-commands:
       - make BASE_PATH=${FLATPAK_DEST}/share/rocksndiamonds
